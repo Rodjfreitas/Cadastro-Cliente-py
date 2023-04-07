@@ -1,4 +1,9 @@
 def leiaInt(msg):
+    """
+    --> Realiza um input esperando receber um número inteiro
+    :param msg: a mensagem que o usuário irá receber como pergunta
+    :return: retorna um int digitado pelo usuário
+    """
     while True:
         try:
             valor = int(input(msg))
@@ -13,6 +18,11 @@ def leiaInt(msg):
 
 
 def leiaFloat(msg):
+    """
+    --> Realiza um input esperando receber um número real
+    :param msg: a mensagem que o usuário irá receber como pergunta
+    :return: retorna um float digitado pelo usuário
+    """
     while True:
         try:
             valor = float(input(msg))
@@ -37,6 +47,11 @@ def cabeçalho(msg, tam=42):
 
 
 def menu(lista):
+    """
+    --> Imprime conteúdo de uma lista em forma de opções
+    :param lista: conteúdo de uma lista que será apresentado no mural de opções
+    :return: retorna o valor referente a opção desejada
+    """
     cabeçalho('SISTEMA DE CLIENTES v1.0')
     c = 1
     for item in lista:
@@ -48,6 +63,11 @@ def menu(lista):
 
 
 def arquivoExiste(nome):
+    """
+    --> Realiza uma verificação de existencia de arquivo
+    :param nome: nome do arquivo
+    :return: False para arquivo inexistente, True para arquivo existente
+    """
     try:
         a = open(nome, 'rt')
         a.close()
@@ -57,6 +77,11 @@ def arquivoExiste(nome):
 
 
 def criarArquivo(nome):
+    """
+    --> Cria um novo arquivo
+    :param nome: nome do arquivo
+    :return: não possui
+    """
     try:
         a = open(nome, 'wt+')
         a.close()
@@ -67,6 +92,12 @@ def criarArquivo(nome):
 
 
 def verificarnoArquivo(nome, dado):
+    """
+    --> Realiza uma verificação de informações no arquivo
+    :param nome: nome do arquivo
+    :param dado: informação que deseja buscar no arquivo
+    :return: False para dado inexistente no arquivo, True para dado existente no arquivo
+    """
     try:
         a = open(nome, 'rt')
     except:
@@ -81,18 +112,18 @@ def verificarnoArquivo(nome, dado):
         a.close()
 
 
-def cadastrar(arq, cpf, nome, idade, sexo, endereco, cidade, estado):
+def cadastrar(arq, dado1, dado2, dado3, dado4, dado5, dado6, dado7):
     try:
         a = open(arq, 'at')
     except:
         print('\033[31mHouve um ERRO na abertura do arquivo\033[m')
     else:
         try:
-            a.write(f'{cpf};{nome};{idade};{sexo};{endereco};{cidade};{estado}\n')
+            a.write(f'{dado1};{dado2};{dado3};{dado4};{dado5};{dado6};{dado7}\n')
         except:
             print('\033[31mHouve um ERRO na hora de escrever os dados\033[m')
         else:
-            print(f'\033[32mNovo Registro de {nome} adicionado.\033[m')
+            print(f'\033[32mNovo Registro de {dado2} adicionado.\033[m')
 
 
 def lerArquivo(nome):
@@ -103,11 +134,11 @@ def lerArquivo(nome):
     else:
         cabeçalho('PESSOAS CADASTRADAS')
         print(
-            f'\033[32;44m{"CPF":<13}{"NOME":<30}{"IDADE":<8}{"SEXO":<8}{"ENDEREÇO":<45}{"CIDADE":<15}{"UF":<6}\033[m')
+            f'\033[32;44m{"CPF":<13}{"NOME":<30}{"IDADE":<8}{"SEXO":<8}{"ENDEREÇO":<45}{"CIDADE":<25}{"UF":<6}\033[m')
         for linha in a:
             dado = linha.split(';')
             dado[6] = dado[6].replace('\n', '')
             print(
-                f'{dado[0]:<13}{dado[1]:<30}{dado[2]:<8}{dado[3]:<8}{dado[4]:<45}{dado[5]:<15}{dado[6]:<3}')
+                f'{dado[0]:<13}{dado[1]:<30}{dado[2]:<8}{dado[3]:<8}{dado[4]:<45}{dado[5]:<25}{dado[6]:<3}')
     finally:
         a.close()
